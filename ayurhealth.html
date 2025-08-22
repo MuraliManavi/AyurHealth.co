@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AyurPulse - Ayurvedic Health Monitoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .dosha-gauge {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #f59e0b 0%, #ef4444 50%, #10b981 100%);
+        }
+        .gauge-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-amber-50 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden w-full max-w-4xl">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-green-600 to-emerald-800 p-6 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold flex items-center gap-2">
+                        <i class="fas fa-leaf"></i> AyurPulse
+                    </h1>
+                    <p class="text-emerald-100 mt-1">Ancient Wisdom Meets Modern Health Monitoring</p>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex items-center gap-2 bg-white/20 p-2 rounded-full">
+                        <div class="h-3 w-3 bg-green-400 rounded-full pulse-animation"></div>
+                        <span class="text-xs font-medium">Live Monitoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="p-6">
+            <!-- Dosha Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <!-- Vata Card -->
+                <div class="bg-white border border-amber-100 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-amber-50 p-4">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-amber-800 flex items-center gap-2">
+                                <i class="fas fa-wind"></i> Vata
+                            </h2>
+                            <span class="text-xs px-2 py-1 bg-amber-100 text-amber-800 rounded-full">Air + Ether</span>
+                        </div>
+                        <div class="dosha-gauge mt-3">
+                            <div id="vata-gauge" class="gauge-fill bg-amber-500" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-4xl font-bold text-amber-600" id="vata-value">60</div>
+                        <p class="text-sm text-gray-500 mt-1">Cold, Light, Dry, Mobile</p>
+                    </div>
+                </div>
+
+                <!-- Pitta Card -->
+                <div class="bg-white border border-red-100 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-red-50 p-4">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-red-800 flex items-center gap-2">
+                                <i class="fas fa-fire"></i> Pitta
+                            </h2>
+                            <span class="text-xs px-2 py-1 bg-red-100 text-red-800 rounded-full">Fire + Water</span>
+                        </div>
+                        <div class="dosha-gauge mt-3">
+                            <div id="pitta-gauge" class="gauge-fill bg-red-500" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-4xl font-bold text-red-600" id="pitta-value">70</div>
+                        <p class="text-sm text-gray-500 mt-1">Hot, Sharp, Light, Oily</p>
+                    </div>
+                </div>
+
+                <!-- Kapha Card -->
+                <div class="bg-white border border-blue-100 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-blue-50 p-4">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-blue-800 flex items-center gap-2">
+                                <i class="fas fa-water"></i> Kapha
+                            </h2>
+                            <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Water + Earth</span>
+                        </div>
+                        <div class="dosha-gauge mt-3">
+                            <div id="kapha-gauge" class="gauge-fill bg-blue-500" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-4xl font-bold text-blue-600" id="kapha-value">65</div>
+                        <p class="text-sm text-gray-500 mt-1">Cold, Heavy, Slow, Oily</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Temperature Card -->
+                <div class="bg-white border border-purple-100 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-purple-50 p-4">
+                        <h2 class="text-xl font-semibold text-purple-800 flex items-center gap-2">
+                            <i class="fas fa-temperature-high"></i> Body Temperature
+                        </h2>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-4xl font-bold text-purple-600" id="temp-value">36.5</div>
+                            <p class="text-sm text-gray-500 mt-1">°Celsius</p>
+                        </div>
+                        <div class="h-16 w-16 rounded-full bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-thermometer-half text-purple-500 text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPS Card -->
+                <div class="bg-white border border-green-100 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-green-50 p-4">
+                        <h2 class="text-xl font-semibold text-green-800 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt"></i> Location
+                        </h2>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-lg font-medium text-gray-800" id="gps-value">Lat: 17.385044, Lng: 78.486671</div>
+                            <p class="text-sm text-gray-500 mt-1">Hyderabad, India</p>
+                        </div>
+                        <div class="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-globe-asia text-green-500 text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Status -->
+            <div class="mt-6 bg-gradient-to-r from-amber-50 via-white to-blue-50 border border-gray-200 rounded-xl p-4">
+                <h3 class="font-semibold text-gray-700 mb-2">Ayurvedic Health Status</h3>
+                <div class="flex items-center gap-4">
+                    <div class="flex-1">
+                        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div id="health-status-bar" class="h-full bg-gradient-to-r from-amber-500 via-red-500 to-blue-500 rounded-full" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-medium text-gray-600" id="health-status-text">Balanced</div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2" id="health-advice">Your doshas are relatively balanced. Maintain your current routine with seasonal adjustments.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-50 border-t border-gray-200 p-4 text-center text-gray-500 text-sm">
+            <div class="flex items-center justify-center gap-4 mb-2">
+                <button class="text-emerald-600 hover:text-emerald-800 transition-colors">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+                <button class="text-emerald-600 hover:text-emerald-800 transition-colors">
+                    <i class="fas fa-chart-line"></i> View History
+                </button>
+                <button class="text-emerald-600 hover:text-emerald-800 transition-colors">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+            <p>© 2025 AyurPulse - Ayurvedic Health Monitoring System</p>
+        </div>
+    </div>
+
+    <script>
+        // Simulate the Java backend data with random values
+        function updateData() {
+            // Generate random values similar to the Java code
+            const vata = 60 + Math.floor(Math.random() * 10);
+            const pitta = 70 + Math.floor(Math.random() * 10);
+            const kapha = 65 + Math.floor(Math.random() * 10);
+            const temp = (36 + Math.random()).toFixed(1);
+            const gps = "Lat: 17.385044, Lng: 78.486671";
+            
+            // Update the UI
+            document.getElementById('vata-value').textContent = vata;
+            document.getElementById('pitta-value').textContent = pitta;
+            document.getElementById('kapha-value').textContent = kapha;
+            document.getElementById('temp-value').textContent = temp;
+            document.getElementById('gps-value').textContent = gps;
+            
+            // Update gauge widths
+            document.getElementById('vata-gauge').style.width = `${vata}%`;
+            document.getElementById('pitta-gauge').style.width = `${pitta}%`;
+            document.getElementById('kapha-gauge').style.width = `${kapha}%`;
+            
+            // Update health status
+            updateHealthStatus(vata, pitta, kapha);
+        }
+        
+        function updateHealthStatus(vata, pitta, kapha) {
+            const statusBar = document.getElementById('health-status-bar');
+            const statusText = document.getElementById('health-status-text');
+            const adviceText = document.getElementById('health-advice');
+            
+            // Calculate balance (simple average difference from 65)
+            const avg = (vata + pitta + kapha) / 3;
+            const balance = 100 - Math.abs(avg - 65);
+            
+            // Update status bar
+            statusBar.style.width = `${balance}%`;
+            
+            // Determine status
+            if (balance > 80) {
+                statusText.textContent = "Perfectly Balanced";
+                statusText.className = "text-sm font-medium text-emerald-600";
+                adviceText.textContent = "Your doshas are in perfect harmony. Continue your current lifestyle practices.";
+            } else if (balance > 60) {
+                statusText.textContent = "Balanced";
+                statusText.className = "text-sm font-medium text-green-600";
+                adviceText.textContent = "Your doshas are relatively balanced. Maintain your current routine with seasonal adjustments.";
+            } else if (balance > 40) {
+                statusText.textContent = "Slightly Imbalanced";
+                statusText.className = "text-sm font-medium text-amber-600";
+                adviceText.textContent = "Minor dosha imbalances detected. Consider dietary adjustments and gentle detox.";
+            } else {
+                statusText.textContent = "Imbalanced";
+                statusText.className = "text-sm font-medium text-red-600";
+                adviceText.textContent = "Significant dosha imbalance detected. Consult an Ayurvedic practitioner for personalized guidance.";
+            }
+        }
+        
+        // Initial data load
+        updateData();
+        
+        // Simulate periodic updates (like a real monitoring system)
+        setInterval(updateData, 5000);
+    </script>
+</body>
+</html>
